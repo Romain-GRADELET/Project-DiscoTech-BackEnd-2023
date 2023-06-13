@@ -11,6 +11,7 @@ use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
@@ -21,6 +22,9 @@ class AppFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
+
+        $faker = \Faker\Factory::create();
+
         // =======================================================
         // TODO : Make 2 users (ADMIN + USER profile)
         // =======================================================
@@ -72,7 +76,7 @@ class AppFixtures extends Fixture
         /** @var Style[] $allStyle */
         $allStyle = [];
 
-        for($i=0 ; $i < count($styles); $i++){
+        for($i=1 ; $i < count($styles)+1; $i++){
 
             $newStyle = new Style();
 
@@ -108,20 +112,15 @@ class AppFixtures extends Fixture
         }
 
         // =======================================================
-        // TODO : make ARTIST (10 Artists)
+        // TODO : make ARTIST (50 Artists)
         // =======================================================
-
-        $artistName = [
-            "Pink Floyd", 
-            
-        ];
 
         /** @var Artist $allArtist */
         $allArtist = [];
 
-        for ($i=0; $i < 20 ; $i+1) {
+        for ($i=1; $i <= 30 ; $i+1) {
             $newArtist = new Artist();
-            $newArtist->setFullname("Artiste $i");
+            $newArtist->setFullname($faker->name);
 
             $manager->persist($newArtist);
 
@@ -129,38 +128,20 @@ class AppFixtures extends Fixture
         }
 
         // =======================================================
-        // TODO : make ALBUM (10 albums)
+        // TODO : make ALBUM (50 albums)
         // =======================================================
-
-        $albumName =[
-            "The Dark Side of the Moon"
-            
-        ];
-
-        $albumEdition = [
-            "Harvest"
-
-        ];
-        $albumRelease = [
-            "1973-03-24",
-
-        ];
-        $albumImage = [
-            "https://media.senscritique.com/media/000004795486/300/the_dark_side_of_the_moon.jpg", 
-
-        ];
 
         /** @var Album $allAlbum */
         $allAlbum = [];
 
-        for($i=0; $i < 10 ; $i++){
+        for($i=1; $i <= 50 ; $i++){
             $newAlbum = new Album();
 
-            $newAlbum->setName("album $i");
-            $newAlbum->setEdition("edition $i");
-            $newAlbum->setReleaseDate(new DateTime("2000-01-01"));
+            $newAlbum->setName($faker->sentence(3));
+            $newAlbum->setEdition($faker->sentence(1));
+            $newAlbum->setReleaseDate(new DateTime($faker->date("Y-m-d")));
             $newAlbum->setCreatedAt(new DateTime("now"));
-            $newAlbum->setImage("https://d1csarkz8obe9u.cloudfront.net/posterpreviews/opening-soon%2C-coming-soon-design-template-2ad6ecb3bfc0d528a9999c00a642d447_screen.jpg?ts=1593776133");
+            $newAlbum->setImage($faker->imageUrl(300, 300, "music"));
 
             $manager->persist($newAlbum);
 
@@ -168,31 +149,45 @@ class AppFixtures extends Fixture
         }
 
         // =======================================================
-        // TODO : make SONG (50 songs)
+        // TODO : make SONG (500 songs)
         // =======================================================
 
         /** @var Song $allSong */
         $allsong = [];
 
-        for ($i=0; $i < 50 ; $i++) { 
-            $newSong = new Song();
+        foreach($allAlbum as $album) {
 
-            $newSong->setTitle("title $i");
-            $newSong->setDuration(30000);
-            $newSong->setTrackNb(1);
-            
-            $manager->persist($newSong);
+            for ($i=1; $i <= 10 ; $i++) {
+                $newSong = new Song();
+
+                $newSong->setTitle($faker->sentence(min(2), max(6)));
+                $newSong->setDuration($faker->numberBetween(180000, 300000));
+                $newSong->setTrackNb($i);
+
+                $manager->persist($newSong);
+
+            };
         }
 
         // =======================================================
-        // TODO : ............
+        // TODO : Associate ALBUM with ARTIST
+        // =======================================================
+            
+        // =======================================================
+        // TODO : Associate ALBUM with SONG
+        // =======================================================
+
+        // =======================================================
+        // TODO : Associate ALBUM with STYLE
+        // =======================================================
+
+        // =======================================================
+        // TODO : Associate ALBUM with SUPPORT
         // =======================================================
 
 
 
-        // =======================================================
-        // TODO : ............
-        // =======================================================
+
 
         $manager->flush();
     }
