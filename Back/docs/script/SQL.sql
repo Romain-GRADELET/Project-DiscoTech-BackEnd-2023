@@ -77,4 +77,4 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `firstname`, `lastname`,
 (1,	'admin@admin.com',	'[\"ROLE_ADMIN\"]',	'$2y$13$ZdKTqUsVIggw9REUVSBTn.nwh.YjS8TKqlTme3sTi96HhziHxOfhO',	'romain',	'gradelet',	NULL),
 (2,	'user@user.com',	'[\"ROLE_USER\"]',	'$2y$13$LU7xmAHYLxg9cWqkshuUHOJUBZH7vDHKA/wENstwKu8rtwyUJgBRy',	'user',	'user',	NULL);
 
--- 2023-06-13 07:30:44
+-- 2023-06-13 13:21:25
