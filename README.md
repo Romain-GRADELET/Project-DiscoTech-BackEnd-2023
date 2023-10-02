@@ -87,3 +87,13 @@ Now you can try the connection with the server:
 To finish, don't forget to modify the base URL in the .env file in your front repository.
 
 That's all, enjoy :)
+
+## CREDIT
+FrontEnd Team:
+- Eva Redon (https://github.com/evaredon)
+- Sahra Marchand (https://github.com/sahramarchand)
+- Yan Berdin (https://github.com/YanBerdin)
+
+BackEnd Team:
+- Gaëtan Leborgne (https://github.com/GaetanLeborgne)
+- Romain Gradelet (https://github.com/Romain-GRADELET)
