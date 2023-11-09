@@ -37,9 +37,7 @@ class SongController extends AbstractController
             //header HTTP
             [],
             //context of serialization
-            [
-                "groups" => ["song_browse"],
-            ]
+            ["groups" => ["song_browse"],]
         );
     }
 
